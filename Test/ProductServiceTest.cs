@@ -8,11 +8,7 @@ public class ProductServiceTests
     public async Task AddProductTest()
     {
         await using var context = TestAppDbContextFactory.CreateContext(nameof(AddProductTest));
-
-        var cache = new MemoryCache(new MemoryCacheOptions());
-        var logger = NullLogger<ProductService>.Instance;
-
-        var service = new ProductService(context, cache, logger);
+        var service = new ProductService(context);
 
         var product = new ProductDto
         {
@@ -30,9 +26,7 @@ public class ProductServiceTests
     public async Task GetProductsTest()
     {
         await using var context = TestAppDbContextFactory.CreateContext(nameof(GetProductsTest));
-
-        var cache = new MemoryCache(new MemoryCacheOptions());
-        var logger = NullLogger<ProductService>.Instance;
+         var service = new ProductService(context);
 
         context.Products.AddRange(
             new Product
@@ -60,7 +54,7 @@ public class ProductServiceTests
 
         await context.SaveChangesAsync();
 
-        var service = new ProductService(context, cache, logger);
+       var service = new ProductService(context);
 
         var result = await service.GetAsync();
 
@@ -72,8 +66,7 @@ public class ProductServiceTests
     {
         await using var context = TestAppDbContextFactory.CreateContext(nameof(GetByIdTest));
 
-        var cache = new MemoryCache(new MemoryCacheOptions());
-        var logger = NullLogger<ProductService>.Instance;
+        var service = new ProductService(context);
 
         context.Products.Add(new Product
         {
@@ -85,7 +78,7 @@ public class ProductServiceTests
 
         await context.SaveChangesAsync();
 
-        var service = new ProductService(context, cache, logger);
+       var service = new ProductService(context);
 
         var result = await service.GetByIdAsync(1);
 
@@ -97,8 +90,7 @@ public class ProductServiceTests
     {
         await using var context = TestAppDbContextFactory.CreateContext(nameof(DeleteProductTest));
 
-        var cache = new MemoryCache(new MemoryCacheOptions());
-        var logger = NullLogger<ProductService>.Instance;
+     var service = new ProductService(context);
 
         context.Products.Add(new Product
         {
@@ -110,7 +102,7 @@ public class ProductServiceTests
 
         await context.SaveChangesAsync();
 
-        var service = new ProductService(context, cache, logger);
+        var service = new ProductService(context);
 
         var result = await service.DeleteAsync(1);
 
