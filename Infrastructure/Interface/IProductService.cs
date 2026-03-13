@@ -6,6 +6,4 @@ public interface IProductService
     Task<Response<List<Product>>> GetAsync();
     Task<Response<Product>> GetByIdAsync(int productid);
     Task<Response<string>> DeleteCreatedAtAsync(int productid , DateTime time);
-
-
 }

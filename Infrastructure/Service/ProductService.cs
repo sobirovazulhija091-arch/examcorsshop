@@ -8,7 +8,7 @@ public class ProductService(ApplicationDbContext dbContext,IMemoryCache cache,IL
     private readonly  ApplicationDbContext context = dbContext;
     private readonly ILogger<ProductService> _Logger=logger;
     private readonly IMemoryCache memory=cache;
-      private const string CacheKey = "product";
+    private const string CacheKey = "product";
     public async Task<Response<string>> AddAsync(ProductDto dto)
     {
        var product = new Product
@@ -60,7 +60,6 @@ public class ProductService(ApplicationDbContext dbContext,IMemoryCache cache,IL
        await context.SaveChangesAsync();
        return new Response<string>(HttpStatusCode.OK,"Product Updateed");
     }
-
    public async Task<Response<string>> DeleteCreatedAtAsync(int productid , DateTime time)
     {
           var product = await context.Products.FindAsync(productid);
